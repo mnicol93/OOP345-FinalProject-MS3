@@ -1,11 +1,3 @@
-// Name: Marc Nicolas Oliva
-// Seneca Student ID: 130943202
-// Seneca email: mnicolas-oliva@myseneca.ca
-// Date of completion: 2021-07-11
-//
-// I confirm that I am the only author of this file
-//   and the content was created entirely by me.
-
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
@@ -114,12 +106,12 @@ namespace sdds {
 	}
 	void CustomerOrder::fillItem(Station& station, std::ostream& os) {
 		std::for_each(m_lstItem, m_lstItem + m_cntItem, [&](Item*& item) {
-			if (station.getItemName() == item->m_itemName && station.getQuantity()) {
+			if (station.getItemName() == item->m_itemName && station.getQuantity()>0) {
 				station.updateQuantity();
 				item->m_serialnumber = station.getNextSerialNumber();
 				item->m_isFilled = true;
 
-				os << "    Filled " << m_name << ", " << m_product << " [" <<
+				os << "Filled " << m_name << ", " << m_product << "[" <<
 					item->m_itemName << "]\n";
 			}
 		});
@@ -131,7 +123,7 @@ namespace sdds {
 			os << "[" << std::setfill('0') << std::setw(6) << std::right << item->m_serialnumber <<
 				 "] "<< std::setfill(' ') << std::setw(m_widthField) <<
 				std::left << item->m_itemName << std::setfill(' ') << " - " <<
-				(item->m_isFilled ? "FILLED\n" : "TO BE FILLED\n");
+				(item->m_isFilled ? "\tFILLED\n" : "\tTO BE FILLED\n");
 			});
 	}
 }

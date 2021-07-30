@@ -56,7 +56,7 @@ namespace sdds {
 		(m_stock > 0) ? m_stock-- : m_stock = 0;
 	}
 
-	void Station::display(std::ostream& os, bool full)
+	void Station::display(std::ostream& os, bool full) const 
 	{
 		os << "[" << std::setw(3) << std::setprecision(3) << std::setfill('0') << std::right << m_stationId << "] Item: " << std::setfill(' '); 
 

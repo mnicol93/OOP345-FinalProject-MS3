@@ -10,8 +10,7 @@
 #include <vector>
 #include "Workstation.h"
 namespace sdds {
-	class LineManager
-	{
+	class LineManager {
 	public:
 		LineManager() = default;
 		LineManager(const std::string& file, const std::vector<Workstation*>& stations);
@@ -19,7 +18,7 @@ namespace sdds {
 		bool run(std::ostream& os);
 		void display(std::ostream& os)const;
 	private:
-		std::vector<Workstation*> activeLine{ nullptr };
+		std::vector<Workstation*> activeLine{};
 		size_t m_cntCustomerOrder{ 0u };
 		Workstation* m_firstStation{ nullptr };
 	};

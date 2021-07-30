@@ -8,6 +8,7 @@
 
 #ifndef SDDS_WORKSTATION_H
 #define SDDS_WORKSTATION_H
+
 #include <deque>
 #include <string>
 #include "Station.h"
@@ -20,13 +21,12 @@ namespace sdds {
 	class Workstation : public Station
 	{
 	public:
-		Workstation()=default;
-		Workstation(const std::string& st) : Station(st) {};
+		Workstation(const std::string& str) : Station(str) {};
 		Workstation(const Workstation&) = delete;
 		Workstation(Workstation&&) = delete;
 		Workstation& operator=(const Workstation&) = delete;
 		Workstation& operator=(Workstation&&) = delete;
-		virtual ~Workstation();
+		~Workstation() = default;
 		void fill(std::ostream& os);
 		bool attemptToMoveOrder();
 		void setNextStation(Workstation* st = nullptr) { m_pNextStation = st; };
@@ -34,8 +34,8 @@ namespace sdds {
 		void display(std::ostream& os)const;
 		Workstation& operator+=(CustomerOrder&& newOrder);
 	private:
-		std::deque<CustomerOrder> m_orders;
-		Workstation* m_pNextStation{nullptr};
+		std::deque<CustomerOrder> m_orders{};
+		Workstation* m_pNextStation{ nullptr };
 	};
 }
 #endif
