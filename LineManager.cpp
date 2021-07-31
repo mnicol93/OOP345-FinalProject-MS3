@@ -63,19 +63,20 @@ namespace sdds {
 		os << "Line Manager Iteration: " << localCount++ << std::endl;
 
 		if (!pending.empty()) {
-			pending[0].fillItem(*m_firstStation, os);
+			/*pending[0].fillItem(*m_firstStation, os)*/
+			*m_firstStation += std::move(pending.front());
 			pending.pop_front();
 		}
 		//fill operation
-		std::for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* st) {
+		std::for_each(activeLine.begin(), activeLine.end(), [&](Workstation* st) {
 			st->fill(os);
 			});
 		//attempt to move
-		std::for_each(activeLine.begin(), activeLine.end(), [&os, &complete](Workstation* st) {
-			if (!st->attemptToMoveOrder()) complete = false;
+		std::for_each(activeLine.begin(), activeLine.end(), [&](Workstation* st) {
+			if (!st->attemptToMoveOrder()) m_cntCustomerOrder--;
 			});
 
-		return complete;
+		return m_cntCustomerOrder<=0;
 	}
 	void LineManager::display(std::ostream& os) const {
 		std::for_each(activeLine.begin(), activeLine.end(), [&os](const Workstation* ws) {

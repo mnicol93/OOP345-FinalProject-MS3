@@ -88,7 +88,7 @@ namespace sdds {
 			}
 		}
 		delete[] m_lstItem;
-		m_lstItem = nullptr;
+		/*m_lstItem = nullptr;*/
 	}
 	bool CustomerOrder::isFilled() const {
 		for (size_t i = 0; i < m_cntItem; i++)
